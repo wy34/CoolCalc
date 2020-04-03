@@ -14,7 +14,7 @@
 		3DB47CF72436AD48001441D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DB47CF62436AD48001441D5 /* Assets.xcassets */; };
 		3DB47CFA2436AD48001441D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DB47CF82436AD48001441D5 /* LaunchScreen.storyboard */; };
 		3DB47D022436CC1A001441D5 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB47D012436CC1A001441D5 /* RoundButton.swift */; };
-		3DB47D052436CD4F001441D5 /* BorderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB47D042436CD4F001441D5 /* BorderLabel.swift */; };
+		3DB47D072436D5B6001441D5 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB47D062436D5B6001441D5 /* RoundedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		3DB47CF92436AD48001441D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DB47CFB2436AD48001441D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DB47D012436CC1A001441D5 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundButton.swift; path = ../RoundButton.swift; sourceTree = "<group>"; };
-		3DB47D042436CD4F001441D5 /* BorderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderLabel.swift; sourceTree = "<group>"; };
+		3DB47D062436D5B6001441D5 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				3DB47D012436CC1A001441D5 /* RoundButton.swift */,
-				3DB47D042436CD4F001441D5 /* BorderLabel.swift */,
+				3DB47D062436D5B6001441D5 /* RoundedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -155,8 +155,8 @@
 				3DB47D022436CC1A001441D5 /* RoundButton.swift in Sources */,
 				3DB47CF22436AD44001441D5 /* ViewController.swift in Sources */,
 				3DB47CEE2436AD44001441D5 /* AppDelegate.swift in Sources */,
+				3DB47D072436D5B6001441D5 /* RoundedView.swift in Sources */,
 				3DB47CF02436AD44001441D5 /* SceneDelegate.swift in Sources */,
-				3DB47D052436CD4F001441D5 /* BorderLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

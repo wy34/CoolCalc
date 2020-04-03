@@ -1,5 +1,5 @@
 //
-//  BorderLabel.swift
+//  RoundedView.swift
 //  CoolCalc
 //
 //  Created by William Yeung on 4/2/20.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class BorderLabel: UILabel {
+class RoundedView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.borderWidth = 5
-        layer.borderColor = #colorLiteral(red: 0.1106112227, green: 0.109961234, blue: 0.1111157164, alpha: 1)
         layer.cornerRadius = 10
+        layer.borderColor = #colorLiteral(red: 0.1257418692, green: 0.1250017583, blue: 0.1263155639, alpha: 1)
         clipsToBounds = true
     }
 
