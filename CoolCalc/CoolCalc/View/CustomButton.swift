@@ -1,5 +1,5 @@
 //
-//  RoundButton.swift
+//  CustomButton.swift
 //  CoolCalc
 //
 //  Created by William Yeung on 4/2/20.
@@ -10,7 +10,7 @@ import UIKit
 
 class CustomButton: UIButton {
 
-    override func awakeFromNib() {
+   override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = 18
         layer.shadowRadius = 5
@@ -18,5 +18,4 @@ class CustomButton: UIButton {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = .zero
     }
-    
 }
