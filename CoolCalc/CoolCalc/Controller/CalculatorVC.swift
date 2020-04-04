@@ -68,7 +68,9 @@ class CalculatorVC: UIViewController {
     
     @IBAction func equalButtonPressed(_ sender: CustomButton) {
         // makes sure that in order to  do proper math, there has to be two values
-        guard let _ = calculator.leftValue, let _ = calculator.rightValue else { return }
+        if !calculator.hasTwoValues() {
+            return
+        }
         
         calculator.processOperation(operation: calculator.operation)
         calculator.leftValue = String(calculator.result)

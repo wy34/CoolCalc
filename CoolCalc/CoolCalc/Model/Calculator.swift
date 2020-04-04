@@ -33,4 +33,10 @@ struct Calculator {
             self.result = 0.0
         }
     }
+    
+    
+    func hasTwoValues() -> Bool {
+        guard let _ = self.leftValue, let _ = self.rightValue else { return false }
+        return true
+    }
 }
