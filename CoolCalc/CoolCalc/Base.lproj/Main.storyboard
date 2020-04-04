@@ -265,6 +265,9 @@
                                                         <state key="normal" title="=">
                                                             <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="equalButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fFa-yJ-mOr"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

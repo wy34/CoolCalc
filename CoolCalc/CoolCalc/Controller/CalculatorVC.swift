@@ -11,8 +11,10 @@ import UIKit
 class CalculatorVC: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
-    var resultString = ""
-    
+    var rightValue = ""
+    var leftValue = ""
+    var operation = ""
+    var result = 0.0
     
     
     
@@ -25,17 +27,41 @@ class CalculatorVC: UIViewController {
     }
     
     @IBAction func clearButtonPressed(_ sender: CustomButton) {
-        resultString = ""
+        operation = ""
+        rightValue = ""
+        leftValue = ""
+        result = 0.0
         resultLabel.text = ""
     }
     
     @IBAction func numberButtonPressed(_ sender: UIButton) {
-        resultString += sender.currentTitle!
-        resultLabel.text = resultString
+        if operation == "" {
+            leftValue += sender.currentTitle!
+            resultLabel.text = leftValue
+        } else {
+            rightValue += sender.currentTitle!
+            resultLabel.text = rightValue
+        }
     }
     
     @IBAction func operationButtonPressed(_ sender: CustomButton) {
-        
+        operation = sender.currentTitle!
+        resultLabel.text = operation
+    }
+    
+    @IBAction func equalButtonPressed(_ sender: CustomButton) {
+        if operation == "+" {
+            result = Double(leftValue)! + Double(rightValue)!
+        } else if operation == "-" {
+            result = Double(leftValue)! - Double(rightValue)!
+        } else if operation == "x" {
+            result = Double(leftValue)! * Double(rightValue)!
+        } else if operation == "/" {
+            result = Double(leftValue)! / Double(rightValue)!
+        }
+        leftValue = String(result)
+        rightValue = ""
+        resultLabel.text = String(result)
     }
     
 }
