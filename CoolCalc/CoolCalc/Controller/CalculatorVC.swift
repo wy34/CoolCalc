@@ -11,57 +11,76 @@ import UIKit
 class CalculatorVC: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
-    var rightValue = ""
-    var leftValue = ""
-    var operation = ""
-    var result = 0.0
-    
+
+    var calculator: Calculator!
     
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        calculator = Calculator()
     }
+    
     
     @IBAction func clearButtonPressed(_ sender: CustomButton) {
-        operation = ""
-        rightValue = ""
-        leftValue = ""
-        result = 0.0
-        resultLabel.text = ""
+        calculator.processOperation(operation: .Empty)
+        resultLabel.text = String(Int(calculator.result))
     }
+    
     
     @IBAction func numberButtonPressed(_ sender: UIButton) {
-        if operation == "" {
-            leftValue += sender.currentTitle!
-            resultLabel.text = leftValue
+        if calculator.operation == .Empty {
+            // check to see if the values are nil so they can be set to their respective string type otherwise leave as nil so that
+            // it can be handled by the guard statement below
+            if calculator.leftValue == nil {
+                calculator.leftValue = ""
+                calculator.leftValue! += sender.currentTitle!
+                resultLabel.text = calculator.leftValue
+            }
         } else {
-            rightValue += sender.currentTitle!
-            resultLabel.text = rightValue
+            if calculator.rightValue == nil {
+                calculator.rightValue = ""
+                calculator.rightValue! += sender.currentTitle!
+                resultLabel.text = calculator.rightValue
+            }
         }
     }
     
-    @IBAction func operationButtonPressed(_ sender: CustomButton) {
-        operation = sender.currentTitle!
-        resultLabel.text = operation
+
+    @IBAction func divideBtnPressed(_ sender: Any) {
+        calculator.operation = .Divide
+        resultLabel.text = "/"
     }
+    @IBAction func mulitplyBtnPressed(_ sender: Any) {
+        calculator.operation = .Multiply
+        resultLabel.text = "x"
+    }
+    @IBAction func subtractBtnPressed(_ sender: Any) {
+        calculator.operation = .Subtract
+        resultLabel.text = "-"
+    }
+    @IBAction func addBtnPressed(_ sender: Any) {
+        calculator.operation = .Add
+        resultLabel.text = "+"
+    }
+    
     
     @IBAction func equalButtonPressed(_ sender: CustomButton) {
-        if operation == "+" {
-            result = Double(leftValue)! + Double(rightValue)!
-        } else if operation == "-" {
-            result = Double(leftValue)! - Double(rightValue)!
-        } else if operation == "x" {
-            result = Double(leftValue)! * Double(rightValue)!
-        } else if operation == "/" {
-            result = Double(leftValue)! / Double(rightValue)!
+        // makes sure that in order to  do proper math, there has to be two values
+        guard let _ = calculator.leftValue, let _ = calculator.rightValue else { return }
+        
+        calculator.processOperation(operation: calculator.operation)
+        calculator.leftValue = String(calculator.result)
+        calculator.rightValue = nil
+        
+        // formatting based on whether the answer is fractional or whole
+        // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
+        if calculator.result.truncatingRemainder(dividingBy: 1) == 0 {
+            resultLabel.text = String(Int(calculator.result))
+        } else {
+            resultLabel.text = String(calculator.result)
         }
-        leftValue = String(result)
-        rightValue = ""
-        resultLabel.text = String(result)
     }
-    
 }
+

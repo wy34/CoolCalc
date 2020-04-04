@@ -18,7 +18,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzB-4N-V6Q" customClass="RoundedView" customModule="CoolCalc" customModuleProvider="target">
                                 <rect key="frame" x="28" y="50" width="319" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdfjasdfjadfsj" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uZQ-mh-9oy">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uZQ-mh-9oy">
                                         <rect key="frame" x="15" y="0.0" width="289" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
@@ -78,7 +78,7 @@
                                                     <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Quj-9M-p1e"/>
+                                                    <action selector="divideBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BcN-Pv-UT7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -127,7 +127,7 @@
                                                     <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9SU-DV-bot"/>
+                                                    <action selector="mulitplyBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ueG-T4-w9t"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -176,7 +176,7 @@
                                                     <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PoR-4N-fHq"/>
+                                                    <action selector="subtractBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NBf-3y-ISg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -225,7 +225,7 @@
                                                     <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="operationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dVB-SY-myq"/>
+                                                    <action selector="addBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JsN-QM-dpB"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -247,7 +247,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kq9-Id-FvQ">
                                                 <rect key="frame" x="164.5" y="0.0" width="154.5" height="79.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ri2-ec-fgy" customClass="CustomButton" customModule="CoolCalc" customModuleProvider="target">
+                                                    <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ri2-ec-fgy" customClass="CustomButton" customModule="CoolCalc" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="72" height="79.5"/>
                                                         <color key="backgroundColor" red="0.27722972629999998" green="0.2772307396" blue="0.27723282580000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
@@ -258,7 +258,7 @@
                                                             <action selector="numberButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P1L-lb-SbC"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUA-7R-s7D" customClass="CustomButton" customModule="CoolCalc" customModuleProvider="target">
+                                                    <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUA-7R-s7D" customClass="CustomButton" customModule="CoolCalc" customModuleProvider="target">
                                                         <rect key="frame" x="82" y="0.0" width="72.5" height="79.5"/>
                                                         <color key="backgroundColor" red="0.86093962189999995" green="0.66978865860000003" blue="0.34116235379999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
