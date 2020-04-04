@@ -35,12 +35,18 @@ class CalculatorVC: UIViewController {
             // it can be handled by the guard statement below
             if calculator.leftValue == nil {
                 calculator.leftValue = ""
+            }
+            
+            if calculator.leftValue != nil {
                 calculator.leftValue! += sender.currentTitle!
                 resultLabel.text = calculator.leftValue
             }
         } else {
             if calculator.rightValue == nil {
                 calculator.rightValue = ""
+            }
+            
+            if calculator.rightValue != nil {
                 calculator.rightValue! += sender.currentTitle!
                 resultLabel.text = calculator.rightValue
             }
@@ -68,13 +74,9 @@ class CalculatorVC: UIViewController {
     
     @IBAction func equalButtonPressed(_ sender: CustomButton) {
         // makes sure that in order to  do proper math, there has to be two values
-        if !calculator.hasTwoValues() {
-            return
-        }
+        if !calculator.hasTwoValues() { return }
         
         calculator.processOperation(operation: calculator.operation)
-        calculator.leftValue = String(calculator.result)
-        calculator.rightValue = nil
         
         // formatting based on whether the answer is fractional or whole
         // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5

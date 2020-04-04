@@ -31,10 +31,17 @@ struct Calculator {
             self.rightValue = nil
             self.leftValue = nil
             self.result = 0.0
+            return
         }
+        
+        // assign the answer to results variable so it can be reference by the actual results on screen
+        self.leftValue = String(self.result)
+        // reset to nil so that it can be checked optionally checked otherwise we can't
+        self.rightValue = nil
     }
     
     
+    // checks to make sure that there are two values
     func hasTwoValues() -> Bool {
         guard let _ = self.leftValue, let _ = self.rightValue else { return false }
         return true
