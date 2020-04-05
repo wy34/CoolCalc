@@ -86,4 +86,6 @@ struct Calculator {
             self.result = Double(self.rightValue)!
         }
     }
+    
+    
 }

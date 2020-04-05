@@ -31,21 +31,11 @@ class CalculatorVC: UIViewController {
     
     @IBAction func numberButtonPressed(_ sender: UIButton) {
         if calculator.operation == .Empty {
-                if sender.currentTitle! == "." {
-                    if calculator.leftValue.contains(".") {
-                        return
-                    }
-                }
-                calculator.leftValue += sender.currentTitle!
-                resultLabel.text = calculator.leftValue
+            calculator.leftValue += checkNumberPressed(for: sender, ofValue: calculator.leftValue)
+            resultLabel.text = calculator.leftValue
         } else {
-                if sender.currentTitle! == "." {
-                    if calculator.rightValue.contains(".") {
-                        return
-                    }
-                }
-                calculator.rightValue += sender.currentTitle!
-                resultLabel.text = calculator.rightValue
+            calculator.rightValue += checkNumberPressed(for: sender, ofValue: calculator.rightValue)
+            resultLabel.text = calculator.rightValue
         }
     }
     
@@ -111,6 +101,17 @@ class CalculatorVC: UIViewController {
         } else {
             resultLabel.text = String(number)
         }
+    }
+    
+    
+    // makes sure that a decimal can only be entered once per number, also, if not a decmial, return the button value
+    func checkNumberPressed(for button: UIButton, ofValue: String) -> String {
+        if button.currentTitle! == "." {
+            if ofValue.contains(".") {
+                return ""
+            }
+        }
+        return button.currentTitle!
     }
 }
 
