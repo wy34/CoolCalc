@@ -261,7 +261,7 @@
                                                             <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="numberButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P1L-lb-SbC"/>
+                                                            <action selector="numberButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6dy-gy-dFP"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUA-7R-s7D" customClass="CustomButton" customModule="CoolCalc" customModuleProvider="target">

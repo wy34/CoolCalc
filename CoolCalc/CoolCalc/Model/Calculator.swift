@@ -11,7 +11,7 @@ import Foundation
 struct Calculator {
     var rightValue: String?
     var leftValue: String?
-    var operation: Operation = .Clear
+    var operation: Operation = .Empty
     var result = 0.0
     
     
@@ -29,13 +29,8 @@ struct Calculator {
             self.result = Double(self.leftValue!)! / Double(self.rightValue!)!
         case .PosNeg:
             print("PosNeg")
-        case .Clear:
-            self.operation = .Clear
-            self.rightValue = nil
-            self.leftValue = nil
-            self.result = 0.0
+        case .Empty:
             return
-            
         }
         
         // sets the result to the left value so that further calculations can be performed
@@ -52,6 +47,15 @@ struct Calculator {
         return true
     }
     
+    
+    mutating func clearCalc() {
+        self.operation = .Empty
+        self.rightValue = nil
+        self.leftValue = nil
+        self.result = 0.0
+    }
+    
+    
     mutating func changeToPercent() {
         // do nothing if both values are empty
         if self.leftValue == nil && self.rightValue == nil { return }
@@ -59,7 +63,7 @@ struct Calculator {
         if self.rightValue == nil {
             self.leftValue = String(Double(self.leftValue!)! / Double(100))
             self.result = Double(self.leftValue!)!
-        } else if self.leftValue == nil || self.operation != .Clear {
+        } else if self.leftValue == nil || self.operation != .Empty {
             self.rightValue = String(Double(self.rightValue!)! / Double(100))
             self.result = Double(self.rightValue!)!
         }

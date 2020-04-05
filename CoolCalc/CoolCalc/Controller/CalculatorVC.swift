@@ -11,8 +11,13 @@ import UIKit
 class CalculatorVC: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
-
     var calculator: Calculator!
+    
+    
+    
+    
+    
+    
     
     
     
@@ -22,25 +27,23 @@ class CalculatorVC: UIViewController {
         calculator = Calculator()
     }
     
-    
-    @IBAction func clearButtonPressed(_ sender: CustomButton) {
-        calculator.processOperation(operation: .Clear)
-        resultLabel.text = String(Int(calculator.result))
-    }
-    
-    
     // MARK: - Number buttons
     
     // This is due to an edge case where if a user is missing a second value(left or right), the optional type allows it to be caught by a handler bc it would be nil,
     // but at the same time needs to also be able to turn into string so that multi digit numbers are possible versus only single digit at a time
     // Therefore, the following checks to see if the values are nil(default), if it is change it to a string so that multi digit numbers are possible
     @IBAction func numberButtonPressed(_ sender: UIButton) {
-        if calculator.operation == .Clear {
+        if calculator.operation == .Empty {
             if calculator.leftValue == nil {
                 calculator.leftValue = ""
             }
             
             if calculator.leftValue != nil {
+                if sender.currentTitle! == "." {
+                    if calculator.leftValue!.contains(".") {
+                        return
+                    }
+                }
                 calculator.leftValue! += sender.currentTitle!
                 resultLabel.text = calculator.leftValue
             }
@@ -49,14 +52,18 @@ class CalculatorVC: UIViewController {
                 calculator.rightValue = ""
             }
             
-            if calculator.rightValue != nil {
+           if calculator.rightValue != nil {
+                if sender.currentTitle! == "." {
+                    if calculator.rightValue!.contains(".") {
+                        return
+                    }
+                }
                 calculator.rightValue! += sender.currentTitle!
                 resultLabel.text = calculator.rightValue
             }
         }
     }
     
-
     // MARK: - Operation Buttons
     
     @IBAction func divideBtnPressed(_ sender: Any) {
@@ -76,6 +83,10 @@ class CalculatorVC: UIViewController {
         resultLabel.text = "+"
     }
     
+    
+    
+    // MARK: - Special Buttons
+    
     @IBAction func posNegBtnPressed(_ sender: Any) {
         
     }
@@ -84,6 +95,12 @@ class CalculatorVC: UIViewController {
         calculator.changeToPercent()
         resultLabel.text = String(calculator.result)
     }
+    
+    @IBAction func clearButtonPressed(_ sender: CustomButton) {
+        calculator.clearCalc()
+        resultLabel.text = String(Int(calculator.result))
+    }
+    
     
     // MARK: - Equal button
     

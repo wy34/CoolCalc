@@ -14,5 +14,5 @@ enum Operation {
     case Multiply
     case Divide
     case PosNeg
-    case Clear
+    case Empty
 }
