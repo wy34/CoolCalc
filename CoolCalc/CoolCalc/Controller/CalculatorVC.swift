@@ -46,6 +46,7 @@ class CalculatorVC: UIViewController {
                 }
                 calculator.leftValue! += sender.currentTitle!
                 resultLabel.text = calculator.leftValue
+//                format(Double(calculator.leftValue!)!)
             }
         } else {
             if calculator.rightValue == nil {
@@ -60,6 +61,7 @@ class CalculatorVC: UIViewController {
                 }
                 calculator.rightValue! += sender.currentTitle!
                 resultLabel.text = calculator.rightValue
+//                format(Double(calculator.rightValue!)!)
             }
         }
     }
@@ -88,17 +90,21 @@ class CalculatorVC: UIViewController {
     // MARK: - Special Buttons
     
     @IBAction func posNegBtnPressed(_ sender: Any) {
-        
+        calculator.changeSigns()
+        //resultLabel.text = String(calculator.result)
+        format(calculator.result)
     }
     
     @IBAction func percentBtnPressed(_ sender: Any) {
         calculator.changeToPercent()
-        resultLabel.text = String(calculator.result)
+        //resultLabel.text = String(calculator.result)
+        format(calculator.result)
     }
     
     @IBAction func clearButtonPressed(_ sender: CustomButton) {
         calculator.clearCalc()
-        resultLabel.text = String(Int(calculator.result))
+        //resultLabel.text = String(Int(calculator.result))
+        format(calculator.result)
     }
     
     
@@ -113,10 +119,17 @@ class CalculatorVC: UIViewController {
         
         // formatting based on whether the answer is fractional or whole
         // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
-        if calculator.result.truncatingRemainder(dividingBy: 1) == 0 {
-            resultLabel.text = String(Int(calculator.result))
+        format(calculator.result)
+    }
+    
+    
+    
+    // MARK: - Utility Functions
+    func format(_ number: Double) {
+        if number.truncatingRemainder(dividingBy: 1) == 0 {
+            resultLabel.text = String(Int(number))
         } else {
-            resultLabel.text = String(calculator.result)
+            resultLabel.text = String(number)
         }
     }
 }

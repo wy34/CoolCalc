@@ -27,8 +27,6 @@ struct Calculator {
             self.result = Double(self.leftValue!)! * Double(self.rightValue!)!
         case .Divide:
             self.result = Double(self.leftValue!)! / Double(self.rightValue!)!
-        case .PosNeg:
-            print("PosNeg")
         case .Empty:
             return
         }
@@ -60,11 +58,25 @@ struct Calculator {
         // do nothing if both values are empty
         if self.leftValue == nil && self.rightValue == nil { return }
         
+        // checks which value to turn into percentage and when it is allowed
         if self.rightValue == nil {
             self.leftValue = String(Double(self.leftValue!)! / Double(100))
             self.result = Double(self.leftValue!)!
         } else if self.leftValue == nil || self.operation != .Empty {
             self.rightValue = String(Double(self.rightValue!)! / Double(100))
+            self.result = Double(self.rightValue!)!
+        }
+    }
+    
+    
+    mutating func changeSigns() {
+        if self.leftValue == nil && self.rightValue == nil { return }
+        
+        if self.rightValue == nil {
+            self.leftValue = String(-Double(self.leftValue!)!)
+            self.result = Double(self.leftValue!)!
+        } else if self.leftValue == nil || self.operation == .Empty {
+            self.rightValue = String(-Double(self.rightValue!)!)
             self.result = Double(self.rightValue!)!
         }
     }
