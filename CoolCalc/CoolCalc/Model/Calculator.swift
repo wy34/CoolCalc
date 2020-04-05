@@ -9,8 +9,8 @@
 import Foundation
 
 struct Calculator {
-    var rightValue: String?
-    var leftValue: String?
+    var rightValue = ""
+    var leftValue = ""
     var operation: Operation = .Empty
     var result = 0.0
     
@@ -20,13 +20,13 @@ struct Calculator {
     mutating func processOperation(operation: Operation) {
         switch operation {
         case .Add:
-            self.result = Double(self.leftValue!)! + Double(self.rightValue!)!
+            self.result = Double(self.leftValue)! + Double(self.rightValue)!
         case .Subtract:
-            self.result = Double(self.leftValue!)! - Double(self.rightValue!)!
+            self.result = Double(self.leftValue)! - Double(self.rightValue)!
         case .Multiply:
-            self.result = Double(self.leftValue!)! * Double(self.rightValue!)!
+            self.result = Double(self.leftValue)! * Double(self.rightValue)!
         case .Divide:
-            self.result = Double(self.leftValue!)! / Double(self.rightValue!)!
+            self.result = Double(self.leftValue)! / Double(self.rightValue)!
         case .Empty:
             return
         }
@@ -35,49 +35,55 @@ struct Calculator {
         // further numbers will always be considered the "2nd number" so therefore stored in right value
         self.leftValue = String(self.result)
         // reset to nil so that further calculation can be performed and can be checked optionally checked
-        self.rightValue = nil
+        self.rightValue = ""
+        // reset the operation after one was just completed
+        self.operation = .Empty
     }
     
     
-    // checks to make sure that there are two values
+    // checks to make sure that there are two numbers
     func hasTwoValues() -> Bool {
-        guard let _ = self.leftValue, let _ = self.rightValue else { return false }
+        guard let _ = Double(self.leftValue), let _ = Double(self.rightValue) else { return false }
         return true
     }
     
     
     mutating func clearCalc() {
         self.operation = .Empty
-        self.rightValue = nil
-        self.leftValue = nil
+        self.rightValue = ""
+        self.leftValue = ""
         self.result = 0.0
     }
     
     
     mutating func changeToPercent() {
         // do nothing if both values are empty
-        if self.leftValue == nil && self.rightValue == nil { return }
+        if self.leftValue == "" && self.rightValue == "" { return }
         
         // checks which value to turn into percentage and when it is allowed
-        if self.rightValue == nil {
-            self.leftValue = String(Double(self.leftValue!)! / Double(100))
-            self.result = Double(self.leftValue!)!
-        } else if self.leftValue == nil || self.operation != .Empty {
-            self.rightValue = String(Double(self.rightValue!)! / Double(100))
-            self.result = Double(self.rightValue!)!
+        if self.rightValue == "" {
+            self.leftValue = String(Double(self.leftValue)! / Double(100))
+            self.result = Double(self.leftValue)!
+        } else if self.leftValue == "" || self.operation != .Empty {
+            self.rightValue = String(Double(self.rightValue)! / Double(100))
+            self.result = Double(self.rightValue)!
         }
     }
     
     
     mutating func changeSigns() {
-        if self.leftValue == nil && self.rightValue == nil { return }
+        if self.leftValue == "" && self.rightValue == "" { return }
         
-        if self.rightValue == nil {
-            self.leftValue = String(-Double(self.leftValue!)!)
-            self.result = Double(self.leftValue!)!
-        } else if self.leftValue == nil || self.operation == .Empty {
-            self.rightValue = String(-Double(self.rightValue!)!)
-            self.result = Double(self.rightValue!)!
+        if self.operation == .Empty {
+            self.leftValue = String(-Double(self.leftValue)!)
+            self.result = Double(self.leftValue)!
+        } else if self.leftValue == "" || self.operation != .Empty {
+            if self.rightValue == "" {
+                self.result = 0.0
+                return
+            }
+            self.rightValue = String(-Double(self.rightValue)!)
+            self.result = Double(self.rightValue)!
         }
     }
 }
