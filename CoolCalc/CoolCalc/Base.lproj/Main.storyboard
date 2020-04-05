@@ -61,6 +61,9 @@
                                                 <state key="normal" title="+/-">
                                                     <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="posNegBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="86a-qh-TXx"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4x-pm-Twg" customClass="CustomButton" customModule="CoolCalc" customModuleProvider="target">
                                                 <rect key="frame" x="164.5" y="0.0" width="72" height="79.5"/>
@@ -69,6 +72,9 @@
                                                 <state key="normal" title="%">
                                                     <color key="titleColor" red="0.95924546259999999" green="0.95924546259999999" blue="0.95924546259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="percentBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pIP-b9-3D0"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67J-xf-eBG" customClass="CustomButton" customModule="CoolCalc" customModuleProvider="target">
                                                 <rect key="frame" x="246.5" y="0.0" width="72.5" height="79.5"/>

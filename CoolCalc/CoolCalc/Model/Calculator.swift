@@ -11,11 +11,12 @@ import Foundation
 struct Calculator {
     var rightValue: String?
     var leftValue: String?
-    var operation: Operation = .Empty
+    var operation: Operation = .Clear
     var result = 0.0
     
     
     
+   
     mutating func processOperation(operation: Operation) {
         switch operation {
         case .Add:
@@ -26,17 +27,21 @@ struct Calculator {
             self.result = Double(self.leftValue!)! * Double(self.rightValue!)!
         case .Divide:
             self.result = Double(self.leftValue!)! / Double(self.rightValue!)!
-        case .Empty:
-            self.operation = .Empty
+        case .PosNeg:
+            print("PosNeg")
+        case .Clear:
+            self.operation = .Clear
             self.rightValue = nil
             self.leftValue = nil
             self.result = 0.0
             return
+            
         }
         
-        // assign the answer to results variable so it can be reference by the actual results on screen
+        // sets the result to the left value so that further calculations can be performed
+        // further numbers will always be considered the "2nd number" so therefore stored in right value
         self.leftValue = String(self.result)
-        // reset to nil so that it can be checked optionally checked otherwise we can't
+        // reset to nil so that further calculation can be performed and can be checked optionally checked
         self.rightValue = nil
     }
     
@@ -45,5 +50,18 @@ struct Calculator {
     func hasTwoValues() -> Bool {
         guard let _ = self.leftValue, let _ = self.rightValue else { return false }
         return true
+    }
+    
+    mutating func changeToPercent() {
+        // do nothing if both values are empty
+        if self.leftValue == nil && self.rightValue == nil { return }
+        
+        if self.rightValue == nil {
+            self.leftValue = String(Double(self.leftValue!)! / Double(100))
+            self.result = Double(self.leftValue!)!
+        } else if self.leftValue == nil || self.operation != .Clear {
+            self.rightValue = String(Double(self.rightValue!)! / Double(100))
+            self.result = Double(self.rightValue!)!
+        }
     }
 }

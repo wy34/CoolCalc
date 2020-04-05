@@ -24,15 +24,18 @@ class CalculatorVC: UIViewController {
     
     
     @IBAction func clearButtonPressed(_ sender: CustomButton) {
-        calculator.processOperation(operation: .Empty)
+        calculator.processOperation(operation: .Clear)
         resultLabel.text = String(Int(calculator.result))
     }
     
     
+    // MARK: - Number buttons
+    
+    // This is due to an edge case where if a user is missing a second value(left or right), the optional type allows it to be caught by a handler bc it would be nil,
+    // but at the same time needs to also be able to turn into string so that multi digit numbers are possible versus only single digit at a time
+    // Therefore, the following checks to see if the values are nil(default), if it is change it to a string so that multi digit numbers are possible
     @IBAction func numberButtonPressed(_ sender: UIButton) {
-        if calculator.operation == .Empty {
-            // check to see if the values are nil so they can be set to their respective string type otherwise leave as nil so that
-            // it can be handled by the guard statement below
+        if calculator.operation == .Clear {
             if calculator.leftValue == nil {
                 calculator.leftValue = ""
             }
@@ -54,6 +57,8 @@ class CalculatorVC: UIViewController {
     }
     
 
+    // MARK: - Operation Buttons
+    
     @IBAction func divideBtnPressed(_ sender: Any) {
         calculator.operation = .Divide
         resultLabel.text = "/"
@@ -71,11 +76,22 @@ class CalculatorVC: UIViewController {
         resultLabel.text = "+"
     }
     
+    @IBAction func posNegBtnPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func percentBtnPressed(_ sender: Any) {
+        calculator.changeToPercent()
+        resultLabel.text = String(calculator.result)
+    }
+    
+    // MARK: - Equal button
     
     @IBAction func equalButtonPressed(_ sender: CustomButton) {
-        // makes sure that in order to  do proper math, there has to be two values
+        // makes sure that in order to  do proper math, there has to be two values otherwise, equal button does nothing
         if !calculator.hasTwoValues() { return }
         
+        // performs underlying logic to calculate the numbers
         calculator.processOperation(operation: calculator.operation)
         
         // formatting based on whether the answer is fractional or whole

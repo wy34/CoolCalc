@@ -8,10 +8,11 @@
 
 import Foundation
 
-enum Operation: String {
-    case Add = "+"
-    case Subtract = "-"
-    case Multiply = "*"
-    case Divide = "/"
-    case Empty = "Empty"
+enum Operation {
+    case Add
+    case Subtract
+    case Multiply
+    case Divide
+    case PosNeg
+    case Clear
 }
