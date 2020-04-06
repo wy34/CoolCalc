@@ -93,12 +93,14 @@ class CalculatorVC: UIViewController {
     func format(_ number: Double) -> String {
         // formatting based on whether the answer is fractional or whole
         // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
-        let number = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
+        let decimalNumber = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
+        let wholeNumber = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(String(number)[..<String(number).firstIndex(of: ".")!])
+        
         
         // adds comma delimitor if number is greater than 3 whole digits
-        if Int(number.count) > 3 {
+        if wholeNumber.count > 3 {
             // split the number into an array of strings
-            let numberArrayAsCharacters = Array(number)
+            let numberArrayAsCharacters = Array(wholeNumber)
             var numberArrayAsStrings = numberArrayAsCharacters.map {String($0)}
             var counter = 0
             
@@ -111,10 +113,11 @@ class CalculatorVC: UIViewController {
                 }
             }
             // convert the array back into a string and return the newly formatted number
-            return numberArrayAsStrings.joined(separator: "")
+            let result = number.truncatingRemainder(dividingBy: 1) == 0 ? "" : String(number)[String(number).firstIndex(of: ".")!...]
+            return numberArrayAsStrings.joined(separator: "") + result
         } else {
             // if there is no need to add commas (count was 3 or less)
-            return number
+            return String(decimalNumber)
         }
     }
     
