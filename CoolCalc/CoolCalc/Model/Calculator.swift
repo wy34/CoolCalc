@@ -16,7 +16,7 @@ struct Calculator {
     
     
     
-   
+   // perform calculation based on which operation was pressed
     mutating func processOperation(operation: Operation) {
         switch operation {
         case .Add:
@@ -34,7 +34,7 @@ struct Calculator {
         // sets the result to the left value so that further calculations can be performed
         // further numbers will always be considered the "2nd number" so therefore stored in right value
         self.leftValue = String(self.result)
-        // reset to nil so that further calculation can be performed and can be checked optionally checked
+        // reset to empty so that further calculation can be performed
         self.rightValue = ""
         // reset the operation after one was just completed
         self.operation = .Empty
@@ -48,6 +48,7 @@ struct Calculator {
     }
     
     
+    // resets the calculator
     mutating func clearCalc() {
         self.operation = .Empty
         self.rightValue = ""
@@ -55,7 +56,8 @@ struct Calculator {
         self.result = 0.0
     }
     
-    
+
+    // change the current value to its percentage form
     mutating func changeToPercent() {
         // do nothing if both values are empty
         if self.leftValue == "" && self.rightValue == "" { return }
@@ -71,7 +73,9 @@ struct Calculator {
     }
     
     
+    // change the sign of teh current value
     mutating func changeSigns() {
+        // do nothing if both values are empty
         if self.leftValue == "" && self.rightValue == "" { return }
         
         if self.operation == .Empty {

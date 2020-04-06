@@ -16,12 +16,6 @@ class CalculatorVC: UIViewController {
     
     
     
-    
-    
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         calculator = Calculator()
@@ -32,10 +26,10 @@ class CalculatorVC: UIViewController {
     @IBAction func numberButtonPressed(_ sender: UIButton) {
         if calculator.operation == .Empty {
             calculator.leftValue += checkNumberPressed(for: sender, ofValue: calculator.leftValue)
-            resultLabel.text = calculator.leftValue
+            display(calculator.leftValue)
         } else {
             calculator.rightValue += checkNumberPressed(for: sender, ofValue: calculator.rightValue)
-            resultLabel.text = calculator.rightValue
+            display(calculator.rightValue)
         }
     }
     
@@ -43,19 +37,19 @@ class CalculatorVC: UIViewController {
     
     @IBAction func divideBtnPressed(_ sender: Any) {
         calculator.operation = .Divide
-        resultLabel.text = "/"
+        display("/")
     }
     @IBAction func mulitplyBtnPressed(_ sender: Any) {
         calculator.operation = .Multiply
-        resultLabel.text = "x"
+        display("x")
     }
     @IBAction func subtractBtnPressed(_ sender: Any) {
         calculator.operation = .Subtract
-        resultLabel.text = "-"
+        display("-")
     }
     @IBAction func addBtnPressed(_ sender: Any) {
         calculator.operation = .Add
-        resultLabel.text = "+"
+        display("+")
     }
     
     
@@ -64,17 +58,17 @@ class CalculatorVC: UIViewController {
     
     @IBAction func posNegBtnPressed(_ sender: Any) {
         calculator.changeSigns()
-        format(calculator.result)
+        display(format(calculator.result))
     }
     
     @IBAction func percentBtnPressed(_ sender: Any) {
         calculator.changeToPercent()
-        format(calculator.result)
+        display(format(calculator.result))
     }
     
     @IBAction func clearButtonPressed(_ sender: CustomButton) {
         calculator.clearCalc()
-        format(calculator.result)
+        display(format(calculator.result))
     }
     
     
@@ -89,27 +83,30 @@ class CalculatorVC: UIViewController {
         
         // formatting based on whether the answer is fractional or whole
         // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
-        format(calculator.result)
+        display(format(calculator.result))
     }
     
     
     
-    // MARK: - Utility Functions
-    func format(_ number: Double) {
-        if number.truncatingRemainder(dividingBy: 1) == 0 {
-            resultLabel.text = String(Int(number))
-        } else {
-            resultLabel.text = String(number)
-        }
+    // MARK: - Miscellaneous Functions
+    
+    // formatting based on whether the answer is fractional or whole
+    // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
+    func format(_ number: Double) -> String {
+        
+        
+        return number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
     }
     
+    // displays the button value presses, operations, and  result
+    func display(_ text: String) {
+        resultLabel.text = text
+    }
     
-    // makes sure that a decimal can only be entered once per number, also, if not a decmial, return the button value
+    // makes sure that a decimal can only be entered once per number, if not a decmial, return the button value
     func checkNumberPressed(for button: UIButton, ofValue: String) -> String {
-        if button.currentTitle! == "." {
-            if ofValue.contains(".") {
-                return ""
-            }
+        if button.currentTitle! == "." &&  ofValue.contains(".") {
+            return ""
         }
         return button.currentTitle!
     }
