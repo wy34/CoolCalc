@@ -26,10 +26,10 @@ class CalculatorVC: UIViewController {
     @IBAction func numberButtonPressed(_ sender: UIButton) {
         if calculator.operation == .Empty {
             calculator.leftValue += checkNumberPressed(for: sender, ofValue: calculator.leftValue)
-            display(calculator.leftValue)
+            display(format(Double(calculator.leftValue)!))
         } else {
             calculator.rightValue += checkNumberPressed(for: sender, ofValue: calculator.rightValue)
-            display(calculator.rightValue)
+            display(format(Double(calculator.rightValue)!))
         }
     }
     
@@ -90,25 +90,57 @@ class CalculatorVC: UIViewController {
     
     // MARK: - Miscellaneous Functions
     
-    // formatting based on whether the answer is fractional or whole
-    // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
     func format(_ number: Double) -> String {
+        // formatting based on whether the answer is fractional or whole
+        // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
+        let number = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
         
-        
-        return number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
+        // adds comma delimitor if number is greater than 3 whole digits
+        if Int(number.count) > 3 {
+            // split the number into an array of strings
+            let numberArrayAsCharacters = Array(number)
+            var numberArrayAsStrings = numberArrayAsCharacters.map {String($0)}
+            var counter = 0
+            
+            // going in reverse, insert a comma after every third number
+            for i in stride(from: numberArrayAsStrings.count - 1, to: 0, by: -1) {
+                counter += 1
+                if counter == 3 {
+                    numberArrayAsStrings.insert(",", at: i)
+                    counter = 0
+                }
+            }
+            // convert the array back into a string and return the newly formatted number
+            return numberArrayAsStrings.joined(separator: "")
+        } else {
+            // if there is no need to add commas (count was 3 or less)
+            return number
+        }
     }
+    
+    
+    
+    
     
     // displays the button value presses, operations, and  result
     func display(_ text: String) {
         resultLabel.text = text
     }
     
-    // makes sure that a decimal can only be entered once per number, if not a decmial, return the button value
+    
+    
+    
+    
     func checkNumberPressed(for button: UIButton, ofValue: String) -> String {
-        if button.currentTitle! == "." &&  ofValue.contains(".") {
-            return ""
+        // apparently based off of the apple calculator on my iphone, the max integer allowed is 16 so thats what I tried to attempt here as well
+        if ofValue.count < 16 {
+            // makes sure that a decimal can only be entered once per number, if not a decmial, return the button value
+            if button.currentTitle! == "." &&  ofValue.contains(".") {
+                return ""
+            }
+            return button.currentTitle!
         }
-        return button.currentTitle!
+        return ""
     }
 }
 
