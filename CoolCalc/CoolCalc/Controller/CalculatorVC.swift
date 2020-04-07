@@ -25,11 +25,14 @@ class CalculatorVC: UIViewController {
     
     @IBAction func numberButtonPressed(_ sender: UIButton) {
         if calculator.operation == .Empty {
+            // adds each number pressed onto a string to allow multi digit numbers
             calculator.leftValue += checkNumberPressed(for: sender, ofValue: calculator.leftValue)
-            display(format(Double(calculator.leftValue)!))
+            //display(format(Double(calculator.leftValue)!)) // fix decimal as first input
+            display(calculator.leftValue)
         } else {
             calculator.rightValue += checkNumberPressed(for: sender, ofValue: calculator.rightValue)
-            display(format(Double(calculator.rightValue)!))
+            //display(format(Double(calculator.rightValue)!))
+            display(calculator.rightValue)
         }
     }
     
@@ -90,38 +93,43 @@ class CalculatorVC: UIViewController {
     
     // MARK: - Miscellaneous Functions
     
+//    func format(_ number: Double) -> String {
+//        // formatting based on whether the answer is fractional or whole
+//        // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
+//        let decimalNumber = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
+//        let wholeNumber = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(String(number)[..<String(number).firstIndex(of: ".")!])
+//
+//
+//        // adds comma delimitor if number is greater than 3 whole digits
+//        if wholeNumber.count > 3 {
+//            // split the number into an array of strings
+//            let numberArrayAsCharacters = Array(wholeNumber)
+//            var numberArrayAsStrings = numberArrayAsCharacters.map {String($0)}
+//            var counter = 0
+//
+//            // going in reverse, insert a comma after every third number
+//            for i in stride(from: numberArrayAsStrings.count - 1, to: 0, by: -1) {
+//                counter += 1
+//                if counter == 3 {
+//                    numberArrayAsStrings.insert(",", at: i)
+//                    counter = 0
+//                }
+//            }
+//            // convert the array back into a string and return the newly formatted number
+//            let result = number.truncatingRemainder(dividingBy: 1) == 0 ? "" : String(number)[String(number).firstIndex(of: ".")!...]
+//            return numberArrayAsStrings.joined(separator: "") + result
+//        } else {
+//            // if there is no need to add commas (count was 3 or less)
+//            return String(decimalNumber)
+//        }
+//    }
+//
+    
     func format(_ number: Double) -> String {
         // formatting based on whether the answer is fractional or whole
         // i.e. If answer is 1, display as 1 and not 1.0 but 2.5 if it is indeed 2.5
-        let decimalNumber = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
-        let wholeNumber = number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(String(number)[..<String(number).firstIndex(of: ".")!])
-        
-        
-        // adds comma delimitor if number is greater than 3 whole digits
-        if wholeNumber.count > 3 {
-            // split the number into an array of strings
-            let numberArrayAsCharacters = Array(wholeNumber)
-            var numberArrayAsStrings = numberArrayAsCharacters.map {String($0)}
-            var counter = 0
-            
-            // going in reverse, insert a comma after every third number
-            for i in stride(from: numberArrayAsStrings.count - 1, to: 0, by: -1) {
-                counter += 1
-                if counter == 3 {
-                    numberArrayAsStrings.insert(",", at: i)
-                    counter = 0
-                }
-            }
-            // convert the array back into a string and return the newly formatted number
-            let result = number.truncatingRemainder(dividingBy: 1) == 0 ? "" : String(number)[String(number).firstIndex(of: ".")!...]
-            return numberArrayAsStrings.joined(separator: "") + result
-        } else {
-            // if there is no need to add commas (count was 3 or less)
-            return String(decimalNumber)
-        }
+        return number.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(number)) : String(number)
     }
-    
-    
     
     
     
@@ -129,8 +137,6 @@ class CalculatorVC: UIViewController {
     func display(_ text: String) {
         resultLabel.text = text
     }
-    
-    
     
     
     
